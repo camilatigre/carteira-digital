@@ -1,0 +1,41 @@
+/* Arquivo de estilos que impactam em toda a aplicação */
+
+/* COLORS PATTERN */
+/* #B1C1D2 GREY */
+/* #00AB63 GREEN */
+/* #F3F7FC BG GREY */
+
+*,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.logoWithName {
+  display: flex;
+}
+
+.logoWithName .logoName {
+  color: #00ab63;
+  font-size: 2em;
+  font-weight: 800;
+  text-transform: uppercase;
+  align-self: center;
+}
+
+.logoWithName .logoName.white {
+  color: #fff;
+}
+
+.logoIcon {
+  color: #00ab63;
+  font-size: 4em !important;
+}
+
+.logoIcon.white {
+  color: #fff;
+}
