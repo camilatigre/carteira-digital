@@ -10,7 +10,9 @@ const Login = () => {
       <Header whiteLogo={true} />
       <div id="login">
         <div className="container">
-          <p>Faça aqui seu login para aproveitar o app!</p>
+          <p className="paragraphGreen" align="center">
+            Faça aqui seu login para começar suas transações!
+          </p>
           <TextField
             className="textField"
             fullWidth
@@ -27,8 +29,14 @@ const Login = () => {
             required
             variant="outlined"
           />
-          <Button variant="outlined">Quero me cadastrar</Button>
-          <Button variant="contained">Entrar</Button>
+          <div className="buttonContainer">
+            <Button variant="outlined" className="secondaryButton">
+              Quero me cadastrar
+            </Button>
+            <Button variant="contained" className="primaryButton">
+              Entrar
+            </Button>
+          </div>
         </div>
       </div>
     </Fragment>

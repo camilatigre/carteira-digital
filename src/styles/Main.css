@@ -3,6 +3,7 @@
 /* COLORS PATTERN */
 /* #B1C1D2 GREY */
 /* #00AB63 GREEN */
+/* #018a50 GREEN DARK*/
 /* #F3F7FC BG GREY */
 
 *,
@@ -38,4 +39,33 @@ body {
 
 .logoIcon.white {
   color: #fff;
+}
+
+.paragraphGreen {
+  color: #00ab63;
+  font-weight: bold;
+}
+
+/* REGRAS PARA SUBSCREVER MATERIAL UI STYLES */
+.MuiButton-contained.primaryButton {
+  color: #fff;
+  background: #00ab63;
+}
+
+.MuiButton-contained.primaryButton:hover {
+  background: #018a50;
+}
+
+.MuiButton-outlined.secondaryButton {
+  color: #00ab63;
+  border-color: #b1c1d2;
+  background: #fff;
+}
+
+.MuiFormLabel-root.MuiInputLabel-root.Mui-focused {
+  color: #00ab63;
+}
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-fullWidth.MuiInputBase-formControl.Mui-focused:before {
+  border-color: #00ab63;
 }
