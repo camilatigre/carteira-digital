@@ -5,6 +5,7 @@ coverage
 .gitignore
 yarn.lock
 package-lock.json
+.eslintrc.js
 
 # Ignore all HTML files:
 *.html
