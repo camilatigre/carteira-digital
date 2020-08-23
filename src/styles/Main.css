@@ -16,6 +16,10 @@ body {
   font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 .logoWithName {
   display: flex;
 }

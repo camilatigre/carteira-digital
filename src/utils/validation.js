@@ -36,11 +36,11 @@ const emailRulesToValidation = (value) => {
     return "Favor digitar um e-mail.";
   }
 
-  let regex = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/);
+  // let regex = new RegExp(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i);
 
-  if (!regex.test(value)) {
-    return "Favor digitar um e-mail válido.";
-  }
+  // if (!regex.test(value)) {
+  //   return "Favor digitar um e-mail válido.";
+  // }
 
   return "";
 };
