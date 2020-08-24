@@ -1,10 +1,9 @@
 export default (state, action) => {
-  console.log(state);
   switch (action.type) {
     case "SAVE_CREDENTIALS":
       return {
         ...state,
-        credentials: state.credentials,
+        credentials: action.payload.login,
       };
     default:
       return state;

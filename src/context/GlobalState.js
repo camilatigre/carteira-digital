@@ -2,7 +2,7 @@ import React, { createContext, useReducer } from "react";
 import AppReducer from "./AppReducer";
 
 const initialState = {
-  credenditals: { login: "" },
+  credentials: { login: "" },
 };
 
 export const GlobalContext = createContext(initialState);
@@ -19,7 +19,7 @@ export const GlobalProvider = ({ children }) => {
   return (
     <GlobalContext.Provider
       value={{
-        credenditals: state.credenditals,
+        credentials: state.credentials,
         saveCredentials,
       }}
     >
