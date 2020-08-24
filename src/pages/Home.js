@@ -7,19 +7,19 @@ const Home = () => {
   const { credentials } = useContext(GlobalContext);
   let history = useHistory();
 
-  console.log(credentials);
-
-  const isLogged = localStorage.getItem("login") && credentials.login;
+  const reais = 100;
+  const isLogged = localStorage.getItem("login") === credentials;
 
   if (!isLogged) {
     history.push("/401");
-    return;
   }
 
   return (
     <Fragment>
       <Header />
-      <div id="home">"pagina inicial"</div>
+      <div id="home">
+        <div>Olá, você tem: R$ {reais},00 para comprar Britas e Bitcoins.</div>
+      </div>
     </Fragment>
   );
 };
