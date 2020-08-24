@@ -1,14 +1,16 @@
 import React, { Fragment, useState, useContext } from "react";
-import "../styles/pages/Login.css";
+import "../styles/common/Forms.css";
 import Header from "../common/Header";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { fieldsValidation } from "../utils/validation";
 import { GlobalContext } from "../context/GlobalState";
 
 const Login = () => {
   const { saveCredentials } = useContext(GlobalContext);
+
+  let history = useHistory();
 
   const [email, setEmail] = useState({ name: "email", value: "", helper: "" });
   const [password, setPassword] = useState({
@@ -19,8 +21,6 @@ const Login = () => {
 
   const onChange = (evt) => {
     const { name, value } = evt.target;
-
-    console.log(evt.target.value);
 
     switch (name) {
       case "email":
@@ -36,8 +36,6 @@ const Login = () => {
 
   const enterOnApp = () => {
     const notValidFields = fieldsValidation([email, password]);
-
-    console.log(notValidFields);
 
     if (notValidFields.length > 0) {
       notValidFields.forEach((field) => {
@@ -58,7 +56,7 @@ const Login = () => {
       localStorage.clear();
       localStorage.setItem("login", email.value);
       saveCredentials({ login: email.value });
-      console.log(this.props);
+      history.push("/home");
       return;
     }
   };
@@ -66,7 +64,7 @@ const Login = () => {
   return (
     <Fragment>
       <Header whiteLogo={true} />
-      <div id="login">
+      <div id="form">
         <div className="container">
           <p className="paragraphGreen" align="center">
             Faça aqui seu login para começar suas transações!
