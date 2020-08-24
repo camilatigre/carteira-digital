@@ -50,6 +50,10 @@ a {
   font-weight: bold;
 }
 
+.paragraphGreen span {
+  font-size: 18px;
+}
+
 /* REGRAS PARA SUBSCREVER MATERIAL UI STYLES */
 .MuiButton-contained.primaryButton {
   color: #fff;
