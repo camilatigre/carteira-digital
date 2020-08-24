@@ -16,8 +16,6 @@ export const fieldsValidation = (fields) => {
     }
   }
 
-  console.log(validFields);
-
   return validFields;
 };
 

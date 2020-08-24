@@ -50,15 +50,15 @@ const Login = () => {
       return;
     }
 
-    const hasSomeoneLoggedIn = localStorage.getItem("login");
+    const hasSomeoneLoggedIn = localStorage.getItem("login") !== "";
 
     if (hasSomeoneLoggedIn) {
       localStorage.clear();
-      localStorage.setItem("login", email.value);
-      saveCredentials({ login: email.value });
-      history.push("/home");
-      return;
     }
+
+    localStorage.setItem("login", email.value);
+    saveCredentials({ login: email.value });
+    history.push("/home");
   };
 
   return (

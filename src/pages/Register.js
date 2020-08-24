@@ -11,6 +11,7 @@ const Register = () => {
   const { saveCredentials } = useContext(GlobalContext);
 
   const [email, setEmail] = useState({ name: "email", value: "", helper: "" });
+
   const [password, setPassword] = useState({
     name: "password",
     value: "",
@@ -23,15 +24,13 @@ const Register = () => {
   });
 
   const [confirmPassword, setConfirmPassword] = useState({
-    name: "completeName",
+    name: "completePassword",
     value: "",
     helper: "",
   });
 
   const onChange = (evt) => {
     const { name, value } = evt.target;
-
-    console.log(evt.target.value);
 
     switch (name) {
       case "email":
@@ -76,11 +75,10 @@ const Register = () => {
 
     if (hasSomeoneLoggedIn) {
       localStorage.clear();
-      localStorage.setItem("login", email.value);
-      saveCredentials({ login: email.value });
-      console.log(this.props);
-      return;
     }
+
+    localStorage.setItem("login", email.value);
+    saveCredentials({ login: email.value });
   };
 
   return (
