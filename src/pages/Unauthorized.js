@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Header from "../common/Header";
 import { Link } from "react-router-dom";
 import "../styles/pages/Unauthorized.css";
@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 
 const Unauthorized = () => {
   return (
-    <Fragment>
+    <div className="outsideBody">
       <Header />
       <div id="unauthorized">
         <h1>401</h1>
@@ -21,7 +21,7 @@ const Unauthorized = () => {
           </Button>
         </Link>
       </div>
-    </Fragment>
+    </div>
   );
 };
 

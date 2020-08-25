@@ -27,6 +27,10 @@ const fieldsRulesByName = (field) => {
   if (field.name === "password") {
     return passwordRulesToValidation(field.value);
   }
+
+  if (field.name === "completeName") {
+    return completeNameRulesToValidation(field.value);
+  }
 };
 
 const emailRulesToValidation = (value) => {
@@ -34,11 +38,11 @@ const emailRulesToValidation = (value) => {
     return "Favor digitar um e-mail.";
   }
 
-  // let regex = new RegExp(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i);
+  let regex = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  // if (!regex.test(value)) {
-  //   return "Favor digitar um e-mail válido.";
-  // }
+  if (!regex.test(String(value).toLocaleLowerCase())) {
+    return "Favor digitar um e-mail válido.";
+  }
 
   return "";
 };
@@ -46,6 +50,18 @@ const emailRulesToValidation = (value) => {
 const passwordRulesToValidation = (value) => {
   if (value === "") {
     return "Favor digitar uma senha.";
+  }
+
+  if (value.length === 3) {
+    return "Sua senha precisa ter pelo menos 4 caracteres";
+  }
+
+  return "";
+};
+
+const completeNameRulesToValidation = (value) => {
+  if (value === "") {
+    return "Favor digitar uma nome.";
   }
 
   return "";

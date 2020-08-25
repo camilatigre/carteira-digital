@@ -1,11 +1,11 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import "../styles/common/Forms.css";
 import Header from "../common/Header";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link, useHistory } from "react-router-dom";
 import { fieldsValidation } from "../utils/validation";
-import { GlobalContext } from "../context/GlobalState";
+import { GlobalContext } from "../common/context/GlobalState";
 
 const Login = () => {
   const { saveCredentials } = useContext(GlobalContext);
@@ -62,7 +62,7 @@ const Login = () => {
   };
 
   return (
-    <Fragment>
+    <div className="outsideBody">
       <Header whiteLogo={true} />
       <div id="form">
         <div className="container">
@@ -109,7 +109,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 };
 

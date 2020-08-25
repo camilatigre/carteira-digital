@@ -1,14 +1,16 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import "../styles/common/Forms.css";
 import Header from "../common/Header";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { fieldsValidation } from "../utils/validation";
-import { GlobalContext } from "../context/GlobalState";
+import { GlobalContext } from "../common/context/GlobalState";
 
 const Register = () => {
   const { saveCredentials } = useContext(GlobalContext);
+
+  const history = useHistory();
 
   const [email, setEmail] = useState({ name: "email", value: "", helper: "" });
 
@@ -17,14 +19,9 @@ const Register = () => {
     value: "",
     helper: "",
   });
+
   const [completeName, setCompleteName] = useState({
     name: "completeName",
-    value: "",
-    helper: "",
-  });
-
-  const [confirmPassword, setConfirmPassword] = useState({
-    name: "completePassword",
     value: "",
     helper: "",
   });
@@ -40,7 +37,7 @@ const Register = () => {
         setPassword({ name, value, helper: "" });
         break;
       case "completeName":
-        setPassword({ name, value, helper: "" });
+        setCompleteName({ name, value, helper: "" });
         break;
       default:
         return;
@@ -48,7 +45,7 @@ const Register = () => {
   };
 
   const enterOnApp = () => {
-    const notValidFields = fieldsValidation([email, password]);
+    const notValidFields = fieldsValidation([email, password, completeName]);
 
     if (notValidFields.length > 0) {
       notValidFields.forEach((field) => {
@@ -63,10 +60,6 @@ const Register = () => {
         if (field.name === "completeName") {
           setCompleteName(field);
         }
-
-        if (field.name === "confirmPassword") {
-          setConfirmPassword(field);
-        }
       });
       return;
     }
@@ -79,10 +72,11 @@ const Register = () => {
 
     localStorage.setItem("login", email.value);
     saveCredentials({ login: email.value });
+    history.push("/home");
   };
 
   return (
-    <Fragment>
+    <div className="outsideBody">
       <Header whiteLogo={true} />
       <div id="form">
         <div className="container">
@@ -94,7 +88,7 @@ const Register = () => {
             className="textField"
             fullWidth
             label="Digite seu NOME"
-            type="completeName"
+            type="name"
             name="completeName"
             required
             variant="outlined"
@@ -126,18 +120,6 @@ const Register = () => {
             helperText={password["helper"]}
             value={password["value"]}
           />
-          <TextField
-            className="textField"
-            fullWidth
-            label="Digite a confirmação de SENHA"
-            type="password"
-            name="confirmPassword"
-            required
-            variant="outlined"
-            onChange={onChange}
-            helperText={confirmPassword["helper"]}
-            value={confirmPassword["value"]}
-          />
           <div className="buttonContainer">
             <Link to="/">
               <Button variant="outlined" className="secondaryButton">
@@ -154,7 +136,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 };
 
