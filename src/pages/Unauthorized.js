@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 const Unauthorized = () => {
   return (
     <div className="outsideBody">
-      <Header />
+      <Header whiteLogo={true} />
       <div id="unauthorized">
         <h1>401</h1>
         <p>
