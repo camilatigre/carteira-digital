@@ -1,7 +1,7 @@
 import React from "react";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 import Unauthorized from "./pages/Unauthorized";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { GlobalProvider } from "./common/context/GlobalState";
