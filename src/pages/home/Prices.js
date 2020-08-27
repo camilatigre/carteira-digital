@@ -1,17 +1,20 @@
 import React from "react";
+import { useGlobalState } from "../../common/context/GlobalState";
+const Prices = ({ today }) => {
+  const { coins } = useGlobalState();
 
-const Prices = ({ coins, today }) => {
-  const { bitcoin, brita } = coins;
+  const { bitcoins, brita } = coins;
+
   return (
     <div className="container prices">
       <h3>Cotações para: {today}</h3>
       <ul>
         <li>
-          <h4>Bitcoin</h4>
+          <h4>Bitcoins</h4>
           <p>
-            Venda: <b>$ {bitcoin.sell}</b>
+            Venda: <b>$ {bitcoins.sell}</b>
             <br />
-            Compra: <b>$ {bitcoin.buy}</b>
+            Compra: <b>$ {bitcoins.buy}</b>
           </p>
         </li>
         <li>

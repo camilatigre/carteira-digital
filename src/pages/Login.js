@@ -1,14 +1,15 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import "../styles/common/Forms.css";
 import Header from "../common/Header";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link, useHistory } from "react-router-dom";
 import { fieldsValidation } from "../utils/validation";
-import { GlobalContext } from "../common/context/GlobalState";
+import { saveCredentials } from "../common/context/AppActions";
+import { useDispatch } from "../common/context/GlobalState";
 
 const Login = () => {
-  const { saveCredentials } = useContext(GlobalContext);
+  const dispatch = useDispatch();
 
   let history = useHistory();
 
@@ -57,7 +58,7 @@ const Login = () => {
     }
 
     localStorage.setItem("login", email.value);
-    saveCredentials({ login: email.value });
+    saveCredentials(dispatch, { login: email.value });
     history.push("/home");
   };
 

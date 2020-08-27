@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -9,23 +9,40 @@ import TextField from "@material-ui/core/TextField";
 import TradeIcon from "@material-ui/icons/SyncAlt";
 import BuyIcon from "@material-ui/icons/CallMade";
 import SellIcon from "@material-ui/icons/CallReceived";
+import { makeTransaction } from "../../common/context/AppActions";
+import { useDispatch, useGlobalState } from "../../common/context/GlobalState";
+
+const termByAction = {
+  buy: "Comprar",
+  trade: "Trocar",
+  sell: "Vender",
+};
+
+const mapCoins = {
+  "R$: Reais": "reais",
+  "฿: BitCoin": "bitcoins",
+  "$: Brita": "brita",
+};
 
 const Actions = () => {
-  const termByAction = {
-    buy: "Comprar",
-    trade: "Trocar",
-    sell: "Vender",
-  };
+  const { coins } = useGlobalState();
+  const dispatch = useDispatch();
 
   const [exchangeFrom, setExchangeFrom] = useState("R$: Reais");
   const [exchangeTo, setExchangeTo] = useState("฿: BitCoin");
+  const [exchangeFromValue, setExchangeFromValue] = useState(0);
+  const [exchangeToValue, setExchangeToValue] = useState(0);
   const [actionSelected, setActionSelected] = useState("buy");
+  const [currentField, setCurrentField] = useState("");
 
   const { optionsExchangeFrom, optionsExchangeTo } = getOptionsByActionSelected(
     actionSelected,
     exchangeFrom,
     exchangeTo
   );
+
+  const from = mapCoins[exchangeFrom];
+  const to = mapCoins[exchangeTo];
 
   const onChange = (evt) => {
     const { name, value } = evt.target;
@@ -34,12 +51,46 @@ const Actions = () => {
       case "exchangeFrom":
         setExchangeFrom(value);
         break;
+      case "exchangeFromValue":
+        setExchangeFromValue(value);
+        break;
       case "exchangeTo":
         setExchangeTo(value);
+        break;
+      case "exchangeToValue":
+        setExchangeToValue(value);
         break;
       default:
         return;
     }
+  };
+
+  const onKeyUp = (name) => () => {
+    setCurrentField(name);
+  };
+
+  useEffect(() => {
+    if (currentField === "exchangeToValue") {
+      setExchangeFromValue(exchangeToValue * coins[to]["buy"]);
+    }
+  }, [exchangeFrom, exchangeTo, exchangeToValue]);
+
+  useEffect(() => {
+    if (currentField === "exchangeFromValue") {
+      setExchangeToValue(exchangeFromValue / coins[to]["buy"]);
+    }
+  }, [exchangeFrom, exchangeTo, exchangeFromValue]);
+
+  const handleMakeTransaction = () => {
+    let transaction = {
+      type: actionSelected,
+      from,
+      to,
+      amountFrom: coins[from]["amount"] - exchangeFromValue,
+      amountTo: coins[to]["amount"] + exchangeToValue,
+    };
+
+    makeTransaction(dispatch, transaction);
   };
 
   const onSelectAction = (type) => {
@@ -106,14 +157,15 @@ const Actions = () => {
         </FormControl>
         <TextField
           className="textField"
+          onKeyUp={onKeyUp("exchangeFromValue")}
           fullWidth
           label={`Digite a quantidade desejada de: ${exchangeFrom}.`}
-          type="text"
-          name="valueToExchange"
+          type="number"
+          name="exchangeFromValue"
           required
           variant="outlined"
           onChange={onChange}
-          value={10}
+          value={exchangeFromValue}
         />
       </div>
       <div className="coinGroup">
@@ -141,18 +193,23 @@ const Actions = () => {
 
         <TextField
           className="textField"
+          onKeyUp={onKeyUp("exchangeToValue")}
           fullWidth
           label={`Digite a quantidade desejada de: ${exchangeTo}.`}
-          type="text"
-          name="valueToExchange"
+          type="number"
+          name="exchangeToValue"
           required
           variant="outlined"
           onChange={onChange}
-          value={10}
+          value={exchangeToValue}
         />
       </div>
 
-      <Button variant="outlined" className="secondaryButton lastActionButton">
+      <Button
+        onClick={handleMakeTransaction}
+        variant="outlined"
+        className="secondaryButton lastActionButton"
+      >
         {termByAction[actionSelected]}
       </Button>
     </div>
