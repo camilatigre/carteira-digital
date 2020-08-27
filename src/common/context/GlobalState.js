@@ -1,29 +1,39 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useContext } from "react";
 import AppReducer from "./AppReducer";
 
 const initialState = {
   credentials: { login: "" },
+  transactions: [],
+  coins: {
+    reais: {
+      amount: 100000,
+    },
+    bitcoins: {
+      buy: 0,
+      sell: 0,
+      amount: 0,
+    },
+    brita: {
+      buy: 0,
+      sell: 0,
+      amount: 0,
+    },
+  },
 };
 
-export const GlobalContext = createContext(initialState);
+export const GlobalContext = createContext();
+export const GlobalDispatch = createContext();
 export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
-  function saveCredentials(login) {
-    dispatch({
-      type: "SAVE_CREDENTIALS",
-      payload: login,
-    });
-  }
-
   return (
-    <GlobalContext.Provider
-      value={{
-        credentials: state.credentials,
-        saveCredentials,
-      }}
-    >
-      {children}
+    <GlobalContext.Provider value={state}>
+      <GlobalDispatch.Provider value={dispatch}>
+        {children}
+      </GlobalDispatch.Provider>
     </GlobalContext.Provider>
   );
 };
+
+export const useGlobalState = () => useContext(GlobalContext);
+export const useDispatch = () => useContext(GlobalDispatch);
