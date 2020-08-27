@@ -12,7 +12,7 @@ import { setCoins } from '../../common/context/AppActions';
 const Home = () => {
   let { today, priceDate } = getToday();
 
-  const { credentials, coins } = useGlobalState();
+  const { coins } = useGlobalState();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,8 +40,8 @@ const Home = () => {
       headers: [['Content-Type', 'application/json']],
     }).then((res) =>
       res.json().then(({ value }) => {
-        const buyCost = value[0] ? parseFloat(value[0].cotacaoCompra).toFixed(2) : 0;
-        const sellCost = value[0] ? parseFloat(value[0].cotacaoVenda).toFixed(2) : 0;
+        const buyCost = value[0] ? parseFloat(value[0].cotacaoCompra).toFixed(2) : 5.57;
+        const sellCost = value[0] ? parseFloat(value[0].cotacaoVenda).toFixed(2) : 5.57;
         setCoins(dispatch, {
           type: 'brita',
           buy: buyCost,
@@ -50,11 +50,11 @@ const Home = () => {
         });
       }),
     );
-  });
+  }, []);
 
   let history = useHistory();
 
-  const isLogged = localStorage.getItem('login') === credentials;
+  const isLogged = localStorage.getItem('login') !== '';
 
   if (!isLogged) {
     history.push('/401');
