@@ -1,5 +1,6 @@
-import React from "react";
-import { useGlobalState } from "../../common/context/GlobalState";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useGlobalState } from '../../common/context/GlobalState';
 const Prices = ({ today }) => {
   const { coins } = useGlobalState();
 
@@ -28,6 +29,10 @@ const Prices = ({ today }) => {
       </ul>
     </div>
   );
+};
+
+Prices.propTypes = {
+  today: PropTypes.string.isRequired,
 };
 
 export default Prices;

@@ -1,36 +1,29 @@
-import React, { useEffect } from "react";
-import "../../styles/pages/Home.css";
-import TradeIcon from "@material-ui/icons/SyncAlt";
-import BuyIcon from "@material-ui/icons/CallMade";
-import SellIcon from "@material-ui/icons/CallReceived";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import { useGlobalState } from "../../common/context/GlobalState";
-import transitions from "@material-ui/core/styles/transitions";
+import React from 'react';
+import '../../styles/pages/Home.css';
+import TradeIcon from '@material-ui/icons/SyncAlt';
+import BuyIcon from '@material-ui/icons/CallMade';
+import SellIcon from '@material-ui/icons/CallReceived';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import { useGlobalState } from '../../common/context/GlobalState';
 
 const Transactions = () => {
   const { transactions } = useGlobalState();
 
   const listItemTextByActionType = (transaction) => {
-    const { type, exchangedFrom, exchangedTo, bitcoin, brita } = transaction;
+    const { type, from, to, amountFrom, amountTo } = transaction;
 
     switch (type) {
-      case "buy":
-        return `Você comprou ${exchangedTo}. Seu saldo de ${exchangedTo} agora é: ${
-          exchangedTo === "bitcoin" ? bitcoin : brita
-        }`;
-      case "sell":
-        return `Você vendeu ${exchangedTo}.Seu saldo de ${exchangedTo} agora é: ${
-          exchangedTo === "bitcoin" ? bitcoin : brita
-        }`;
-      case "trade":
-        return `Você trocou ${exchangedFrom} por ${exchangedTo}. Seu saldo de ${exchangedTo} agora é: ${
-          exchangedTo === "bitcoin" ? bitcoin : brita
-        }`;
+      case 'buy':
+        return `Você comprou ${to}. Seu saldo de ${to} agora é: ${to === 'bitcoin' ? amountFrom : amountTo}`;
+      case 'sell':
+        return `Você vendeu ${to}.Seu saldo de ${to} agora é: ${to === 'bitcoin' ? amountFrom : amountTo}`;
+      case 'trade':
+        return `Você trocou ${from} por ${to}. Seu saldo de ${to} agora é: ${to === 'bitcoin' ? amountFrom : amountTo}`;
 
       default:
-        return "";
+        return '';
     }
   };
 
@@ -40,14 +33,12 @@ const Transactions = () => {
     trade: <TradeIcon />,
   };
 
-  console.log(transactions);
-
   return (
     <div className="transactions">
       {transactions.map((transaction, key) => {
         return (
-          <div className="line">
-            <ListItem key={key}>
+          <div key={key} className="line">
+            <ListItem>
               <ListItemIcon>{iconByActionType[transaction.type]}</ListItemIcon>
               <ListItemText primary={listItemTextByActionType(transaction)} />
             </ListItem>

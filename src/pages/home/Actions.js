@@ -1,44 +1,44 @@
-import React, { useState, useEffect } from "react";
-import Button from "@material-ui/core/Button";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import { getOptionsByActionSelected } from "../../utils/filters";
-import "../../styles/pages/Home.css";
-import TextField from "@material-ui/core/TextField";
-import TradeIcon from "@material-ui/icons/SyncAlt";
-import BuyIcon from "@material-ui/icons/CallMade";
-import SellIcon from "@material-ui/icons/CallReceived";
-import { makeTransaction } from "../../common/context/AppActions";
-import { useDispatch, useGlobalState } from "../../common/context/GlobalState";
+import React, { useState, useEffect } from 'react';
+import Button from '@material-ui/core/Button';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { getOptionsByActionSelected } from '../../utils/filters';
+import '../../styles/pages/Home.css';
+import TextField from '@material-ui/core/TextField';
+import TradeIcon from '@material-ui/icons/SyncAlt';
+import BuyIcon from '@material-ui/icons/CallMade';
+import SellIcon from '@material-ui/icons/CallReceived';
+import { makeTransaction } from '../../common/context/AppActions';
+import { useDispatch, useGlobalState } from '../../common/context/GlobalState';
 
 const termByAction = {
-  buy: "Comprar",
-  trade: "Trocar",
-  sell: "Vender",
+  buy: 'Comprar',
+  trade: 'Trocar',
+  sell: 'Vender',
 };
 
 const mapCoins = {
-  "R$: Reais": "reais",
-  "฿: BitCoin": "bitcoins",
-  "$: Brita": "brita",
+  'R$: Reais': 'reais',
+  '฿: BitCoin': 'bitcoins',
+  '$: Brita': 'brita',
 };
 
 const Actions = () => {
   const { coins } = useGlobalState();
   const dispatch = useDispatch();
 
-  const [exchangeFrom, setExchangeFrom] = useState("R$: Reais");
-  const [exchangeTo, setExchangeTo] = useState("฿: BitCoin");
+  const [exchangeFrom, setExchangeFrom] = useState('R$: Reais');
+  const [exchangeTo, setExchangeTo] = useState('฿: BitCoin');
   const [exchangeFromValue, setExchangeFromValue] = useState(0);
   const [exchangeToValue, setExchangeToValue] = useState(0);
-  const [actionSelected, setActionSelected] = useState("buy");
-  const [currentField, setCurrentField] = useState("");
+  const [actionSelected, setActionSelected] = useState('buy');
+  const [currentField, setCurrentField] = useState('');
 
   const { optionsExchangeFrom, optionsExchangeTo } = getOptionsByActionSelected(
     actionSelected,
     exchangeFrom,
-    exchangeTo
+    exchangeTo,
   );
 
   const from = mapCoins[exchangeFrom];
@@ -48,16 +48,16 @@ const Actions = () => {
     const { name, value } = evt.target;
 
     switch (name) {
-      case "exchangeFrom":
+      case 'exchangeFrom':
         setExchangeFrom(value);
         break;
-      case "exchangeFromValue":
+      case 'exchangeFromValue':
         setExchangeFromValue(value);
         break;
-      case "exchangeTo":
+      case 'exchangeTo':
         setExchangeTo(value);
         break;
-      case "exchangeToValue":
+      case 'exchangeToValue':
         setExchangeToValue(value);
         break;
       default:
@@ -70,15 +70,17 @@ const Actions = () => {
   };
 
   useEffect(() => {
-    if (currentField === "exchangeToValue") {
-      setExchangeFromValue(exchangeToValue * coins[to]["buy"]);
+    if (currentField === 'exchangeToValue') {
+      setExchangeFromValue(exchangeToValue * coins[to]['buy']);
     }
+    // eslint-disable-next-line
   }, [exchangeFrom, exchangeTo, exchangeToValue]);
 
   useEffect(() => {
-    if (currentField === "exchangeFromValue") {
-      setExchangeToValue(exchangeFromValue / coins[to]["buy"]);
+    if (currentField === 'exchangeFromValue') {
+      setExchangeToValue(exchangeFromValue / coins[to]['buy']);
     }
+    // eslint-disable-next-line
   }, [exchangeFrom, exchangeTo, exchangeFromValue]);
 
   const handleMakeTransaction = () => {
@@ -86,8 +88,8 @@ const Actions = () => {
       type: actionSelected,
       from,
       to,
-      amountFrom: coins[from]["amount"] - exchangeFromValue,
-      amountTo: coins[to]["amount"] + exchangeToValue,
+      amountFrom: coins[from]['amount'] - exchangeFromValue,
+      amountTo: coins[to]['amount'] + exchangeToValue,
     };
 
     makeTransaction(dispatch, transaction);
@@ -102,33 +104,27 @@ const Actions = () => {
       <div className="actions">
         <Button
           variant="outlined"
-          className={
-            actionSelected === "buy" ? "actionSelected" : "secondaryButton"
-          }
+          className={actionSelected === 'buy' ? 'actionSelected' : 'secondaryButton'}
           startIcon={<BuyIcon />}
-          onClick={() => onSelectAction("buy")}
+          onClick={() => onSelectAction('buy')}
         >
           Comprar Moedas
         </Button>
 
         <Button
           variant="outlined"
-          className={
-            actionSelected === "trade" ? "actionSelected" : "secondaryButton"
-          }
+          className={actionSelected === 'trade' ? 'actionSelected' : 'secondaryButton'}
           startIcon={<TradeIcon />}
-          onClick={() => onSelectAction("trade")}
+          onClick={() => onSelectAction('trade')}
         >
           Trocar Moedas
         </Button>
 
         <Button
           variant="outlined"
-          className={
-            actionSelected === "sell" ? "actionSelected" : "secondaryButton"
-          }
+          className={actionSelected === 'sell' ? 'actionSelected' : 'secondaryButton'}
           startIcon={<SellIcon />}
-          onClick={() => onSelectAction("sell")}
+          onClick={() => onSelectAction('sell')}
         >
           Vender Moedas
         </Button>
@@ -143,8 +139,8 @@ const Actions = () => {
             onChange={onChange}
             label="Age"
             inputProps={{
-              name: "exchangeFrom",
-              id: "exchangeFrom",
+              name: 'exchangeFrom',
+              id: 'exchangeFrom',
             }}
           >
             <option arial-label="vazio" value=""></option>
@@ -157,7 +153,7 @@ const Actions = () => {
         </FormControl>
         <TextField
           className="textField"
-          onKeyUp={onKeyUp("exchangeFromValue")}
+          onKeyUp={onKeyUp('exchangeFromValue')}
           fullWidth
           label={`Digite a quantidade desejada de: ${exchangeFrom}.`}
           type="number"
@@ -178,8 +174,8 @@ const Actions = () => {
             onChange={onChange}
             label="Escolha segunda moeda"
             inputProps={{
-              name: "exchangeTo",
-              id: "exchangeTo",
+              name: 'exchangeTo',
+              id: 'exchangeTo',
             }}
           >
             <option arial-label="vazio" value=""></option>
@@ -193,7 +189,7 @@ const Actions = () => {
 
         <TextField
           className="textField"
-          onKeyUp={onKeyUp("exchangeToValue")}
+          onKeyUp={onKeyUp('exchangeToValue')}
           fullWidth
           label={`Digite a quantidade desejada de: ${exchangeTo}.`}
           type="number"
@@ -205,11 +201,7 @@ const Actions = () => {
         />
       </div>
 
-      <Button
-        onClick={handleMakeTransaction}
-        variant="outlined"
-        className="secondaryButton lastActionButton"
-      >
+      <Button onClick={handleMakeTransaction} variant="outlined" className="secondaryButton lastActionButton">
         {termByAction[actionSelected]}
       </Button>
     </div>

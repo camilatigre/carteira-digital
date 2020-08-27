@@ -1,8 +1,9 @@
-import React, { createContext, useReducer, useContext } from "react";
-import AppReducer from "./AppReducer";
+import React, { createContext, useReducer, useContext } from 'react';
+import appReducer from './appReducer';
+import PropTypes from 'prop-types';
 
 const initialState = {
-  credentials: { login: "" },
+  credentials: { login: '' },
   transactions: [],
   coins: {
     reais: {
@@ -24,15 +25,17 @@ const initialState = {
 export const GlobalContext = createContext();
 export const GlobalDispatch = createContext();
 export const GlobalProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+  const [state, dispatch] = useReducer(appReducer, initialState);
 
   return (
     <GlobalContext.Provider value={state}>
-      <GlobalDispatch.Provider value={dispatch}>
-        {children}
-      </GlobalDispatch.Provider>
+      <GlobalDispatch.Provider value={dispatch}>{children}</GlobalDispatch.Provider>
     </GlobalContext.Provider>
   );
+};
+
+GlobalProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export const useGlobalState = () => useContext(GlobalContext);

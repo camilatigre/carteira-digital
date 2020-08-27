@@ -1,22 +1,24 @@
-import React from "react";
-import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
-import "../styles/common/Header.css";
+import React from 'react';
+import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
+import '../styles/common/Header.css';
+import PropTypes from 'prop-types';
 
-const Header = ({ showName = true, whiteLogo = false }) => {
-  const iconClass = whiteLogo ? "logoIcon white" : "logoIcon";
-  const nameClass = whiteLogo ? "logoName white" : "logoName";
+const Header = ({ whiteLogo = false }) => {
+  const iconClass = whiteLogo ? 'logoIcon white' : 'logoIcon';
+  const nameClass = whiteLogo ? 'logoName white' : 'logoName';
 
-  if (showName) {
-    return (
-      <div id="header">
-        <div className="logoWithName">
-          <AccountBalanceWalletIcon className={iconClass} />
-          <span className={nameClass}>Carteira Digital</span>
-        </div>
+  return (
+    <div id="header">
+      <div className="logoWithName">
+        <AccountBalanceWalletIcon className={iconClass} />
+        <span className={nameClass}>Carteira Digital</span>
       </div>
-    );
-  }
-  return <AccountBalanceWalletIcon className={iconClass} />;
+    </div>
+  );
+};
+
+Header.propTypes = {
+  whiteLogo: PropTypes.bool,
 };
 
 export default Header;
