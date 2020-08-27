@@ -1,0 +1,37 @@
+/* Arquivo de estilos que impactam apenas na página:
+/* REGISTER
+/* LOGIN
+*/
+
+#form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 100px);
+}
+
+#form .container {
+  width: 40%;
+  min-height: 250px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px 3px #018a50;
+  position: relative;
+}
+
+#form .textField {
+  margin: 20px 0 0 0;
+}
+
+#form .buttonContainer {
+  width: calc(100% - 40px);
+  position: relative;
+  bottom: 0;
+  text-align: right;
+  margin: 20px 40px 0 40px;
+}
+
+#form .primaryButton {
+  margin-left: 20px;
+}

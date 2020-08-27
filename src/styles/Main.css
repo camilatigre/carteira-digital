@@ -1,0 +1,91 @@
+/* Arquivo de estilos que impactam em toda a aplicação */
+
+/* COLORS PATTERN */
+/* #B1C1D2 GREY */
+/* #00AB63 GREEN */
+/* #018a50 GREEN DARK*/
+/* #F3F7FC BG GREY */
+
+*,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+.outsideBody {
+  background-color: #018a50;
+  height: 100vh;
+  width: 100vw;
+}
+
+.internalBody {
+  background-color: #f2f3f8;
+  height: 100vh;
+  width: 100vw;
+}
+
+.logoWithName {
+  display: flex;
+}
+
+.logoWithName .logoName {
+  color: #00ab63;
+  font-size: 2em;
+  font-weight: 800;
+  text-transform: uppercase;
+  align-self: center;
+}
+
+.logoWithName .logoName.white {
+  color: #fff;
+}
+
+.logoIcon {
+  color: #00ab63;
+  font-size: 4em !important;
+}
+
+.logoIcon.white {
+  color: #fff;
+}
+
+.paragraphGreen {
+  color: #00ab63;
+  font-weight: bold;
+}
+
+.paragraphGreen span {
+  font-size: 18px;
+}
+
+/* REGRAS PARA SUBSCREVER MATERIAL UI STYLES */
+.MuiButton-contained.primaryButton {
+  color: #fff;
+  background: #00ab63;
+}
+
+.MuiButton-contained.primaryButton:hover {
+  background: #018a50;
+}
+
+.MuiButton-outlined.secondaryButton {
+  color: #00ab63;
+  border-color: #b1c1d2;
+  background: #fff;
+}
+
+.MuiFormLabel-root.MuiInputLabel-root.Mui-focused {
+  color: #00ab63;
+}
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-fullWidth.MuiInputBase-formControl.Mui-focused:before {
+  border-color: #00ab63;
+}
