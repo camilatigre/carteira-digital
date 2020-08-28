@@ -3,7 +3,7 @@ import '../styles/common/Forms.css';
 import Header from '../common/Header';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, BrowserRouter, useHistory } from 'react-router-dom';
 import { fieldsValidation } from '../utils/validation';
 
 const Login = () => {
@@ -68,7 +68,7 @@ const Login = () => {
           <TextField
             className="textField"
             fullWidth
-            label="Digite seu E-MAIL"
+            label="E-MAIL"
             type="email"
             name="email"
             required
@@ -76,11 +76,15 @@ const Login = () => {
             onChange={onChange}
             helperText={email['helper']}
             value={email['value']}
+            placeholder={'Digite seu E-MAIL'}
+            inputProps={{
+              id: 'idJestEmail',
+            }}
           />
           <TextField
             className="textField"
             fullWidth
-            label="Digite sua SENHA"
+            label="SENHA"
             type="password"
             name="password"
             required
@@ -88,16 +92,22 @@ const Login = () => {
             onChange={onChange}
             helperText={password['helper']}
             value={password['value']}
+            placeholder={'Digite sua SENHA'}
+            inputProps={{
+              id: 'idJestPassword',
+            }}
           />
           <div className="buttonContainer">
-            <Link to="/register">
-              <Button variant="outlined" className="secondaryButton">
-                Quero me cadastrar
+            <BrowserRouter>
+              <Link to="/register">
+                <Button variant="outlined" className="secondaryButton">
+                  Quero me cadastrar
+                </Button>
+              </Link>
+              <Button id="enterButton" onClick={enterOnApp} variant="contained" className="primaryButton">
+                Entrar
               </Button>
-            </Link>
-            <Button onClick={enterOnApp} variant="contained" className="primaryButton">
-              Entrar
-            </Button>
+            </BrowserRouter>
           </div>
         </div>
       </div>

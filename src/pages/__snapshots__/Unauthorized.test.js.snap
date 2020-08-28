@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Unauthorized /> Deveria renderizar a pagina de erro de autorização 1`] = `
+<div
+  className="outsideBody"
+>
+  <Header
+    whiteLogo={true}
+  />
+  <div
+    id="unauthorized"
+  >
+    <h1>
+      401
+    </h1>
+    <p>
+      Desculpe não foi possível encontrar seu usuário. Faça o Login novamente para continuar suas transações
+    </p>
+    <Link
+      to="/"
+    >
+      <WithStyles(ForwardRef(Button))
+        className="secondaryButton"
+        variant="outlined"
+      >
+        Fazer login
+      </WithStyles(ForwardRef(Button))>
+    </Link>
+  </div>
+</div>
+`;

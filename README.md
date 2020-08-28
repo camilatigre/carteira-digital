@@ -7,6 +7,8 @@ Este projeto te ajuda com a venda, troca, cotação e extrato de transações en
 1. `yarn` || `yarn install`
 2. `yarn start`
 3. `yarn build`
+4. `yarn test`
+5. [Demo](https://carteiradigitalstone.herokuapp.com/)
 
 ## Rodar projeto localmente
 
@@ -18,12 +20,13 @@ Este projeto te ajuda com a venda, troca, cotação e extrato de transações en
 
 1. Para colocar em produção é preciso montar um build com o comando: `yarn build`
 2. Por enquanto não serão necessárias configurações de .env
-3. O projeto está implantado na ferramenta [Netilify](https://www.netlify.com/) e disponível no endereço [https://carteiradigitalstone.netlify.app](https://carteiradigitalstone.netlify.app/)
+3. O projeto está implantado na ferramenta [Heroku](https://www.heroku.com/) e disponível no endereço [https://carteiradigitalstone.herokuapp.com/](https://carteiradigitalstone.herokuapp.com/)
 4. Merges para a branch **master** serão automaticamente disponibilzados em produção
 
 ## Testes
 
-**em contrdução**
+1. Para rodar a suite de testes automatizados utilize: `yarn test`
+2. Para ver cobertura de testes use: `yarn test --coverage`
 
 #### Pre-commits
 

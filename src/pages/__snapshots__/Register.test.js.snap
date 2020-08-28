@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Register /> Deveria renderizar a pagina de cadastro 1`] = `
+<div
+  className="outsideBody"
+>
+  <Header
+    whiteLogo={true}
+  />
+  <div
+    id="form"
+  >
+    <div
+      className="container"
+    >
+      <p
+        align="center"
+        className="paragraphGreen"
+      >
+        Faça seu cadastro e ganhe: 
+        <span>
+          R$ 100.000,00
+        </span>
+         para gastar com Britas e Bitcoins!
+      </p>
+      <WithStyles(ForwardRef(TextField))
+        className="textField"
+        fullWidth={true}
+        helperText=""
+        label="Digite seu NOME"
+        name="completeName"
+        onChange={[Function]}
+        required={true}
+        type="name"
+        value=""
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(TextField))
+        className="textField"
+        fullWidth={true}
+        helperText=""
+        label="Digite seu E-MAIL"
+        name="email"
+        onChange={[Function]}
+        required={true}
+        type="email"
+        value=""
+        variant="outlined"
+      />
+      <WithStyles(ForwardRef(TextField))
+        className="textField"
+        fullWidth={true}
+        helperText=""
+        label="Digite sua SENHA"
+        name="password"
+        onChange={[Function]}
+        required={true}
+        type="password"
+        value=""
+        variant="outlined"
+      />
+      <div
+        className="buttonContainer"
+      >
+        <Link
+          to="/"
+        >
+          <WithStyles(ForwardRef(Button))
+            className="secondaryButton"
+            variant="outlined"
+          >
+            Voltar para login
+          </WithStyles(ForwardRef(Button))>
+        </Link>
+        <WithStyles(ForwardRef(Button))
+          className="primaryButton"
+          onClick={[Function]}
+          variant="contained"
+        >
+          Salvar
+        </WithStyles(ForwardRef(Button))>
+      </div>
+    </div>
+  </div>
+</div>
+`;

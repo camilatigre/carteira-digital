@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Home /> Deveria renderizar a pagina inicial 1`] = `
+<div
+  className="internalBody"
+>
+  <Header />
+  <div
+    className="home"
+    id="internalPages"
+  >
+    <div
+      className="info"
+    >
+      <div
+        className="container"
+      >
+        <h3>
+          Olá, 
+          email@exemplo.com
+          ,
+        </h3>
+        <div
+          className="balance"
+        >
+          <p>
+            seu saldo disponível é:
+          </p>
+          <h2>
+            R$ 100000,00
+          </h2>
+          <h4>
+            Bitcoins: $ 
+            0
+          </h4>
+          <h4>
+            Britas: $ 
+            0
+          </h4>
+        </div>
+        <Actions />
+      </div>
+      <Prices
+        today="27/08/2020"
+      />
+    </div>
+    <div
+      className="container statement"
+    >
+      <h3>
+        Extrato de Transações
+      </h3>
+      <Transactions />
+    </div>
+  </div>
+</div>
+`;

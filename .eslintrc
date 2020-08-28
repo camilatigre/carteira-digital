@@ -5,7 +5,9 @@
     "node": true
   },
   "extends": [
+    "react-app",
     "eslint:recommended",
+    "plugin:prettier/recommended",
     "plugin:react/recommended",
     "prettier"
   ],
@@ -17,7 +19,8 @@
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react",
+    "prettier"
   ],
   "rules": {}
 }
