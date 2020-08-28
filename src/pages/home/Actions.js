@@ -9,7 +9,7 @@ import TextField from '@material-ui/core/TextField';
 import TradeIcon from '@material-ui/icons/SyncAlt';
 import BuyIcon from '@material-ui/icons/CallMade';
 import SellIcon from '@material-ui/icons/CallReceived';
-import { makeTransaction } from '../../common/context/AppActions';
+import { makeTransaction, updateCoinsAmount } from '../../common/context/AppActions';
 import { useDispatch, useGlobalState } from '../../common/context/GlobalState';
 
 const termByAction = {
@@ -70,29 +70,79 @@ const Actions = () => {
   };
 
   useEffect(() => {
-    if (currentField === 'exchangeToValue') {
+    if (currentField === 'exchangeToValue' && actionSelected === 'buy') {
       setExchangeFromValue(exchangeToValue * coins[to]['buy']);
     }
+
+    if (currentField === 'exchangeToValue' && actionSelected === 'sell') {
+      setExchangeFromValue(exchangeToValue * coins[to]['sell']);
+    }
+
+    if (currentField === 'exchangeToValue' && actionSelected === 'trade') {
+      setExchangeFromValue((exchangeToValue * coins[to]['sell']) / coins[from]['buy']);
+    }
+
     // eslint-disable-next-line
-  }, [exchangeFrom, exchangeTo, exchangeToValue]);
+  }, [exchangeToValue]);
 
   useEffect(() => {
-    if (currentField === 'exchangeFromValue') {
+    if (currentField === 'exchangeFromValue' && actionSelected === 'buy') {
       setExchangeToValue(exchangeFromValue / coins[to]['buy']);
     }
+
+    if (currentField === 'exchangeFromValue' && actionSelected === 'sell') {
+      setExchangeToValue(exchangeFromValue * coins[from]['sell']);
+    }
+
+    if (currentField === 'exchangeFromValue' && actionSelected === 'trade') {
+      setExchangeToValue((exchangeFromValue * coins[from]['sell']) / coins[to]['buy']);
+    }
     // eslint-disable-next-line
-  }, [exchangeFrom, exchangeTo, exchangeFromValue]);
+  }, [exchangeFromValue]);
+
+  const updateTransactionAndCoins = (newTransactionValue, amountFrom, amountTo) => {
+    updateCoinsAmount(
+      dispatch,
+      {
+        typeFrom: from,
+        amountFrom,
+      },
+      {
+        typeTo: to,
+        amountTo,
+      },
+    );
+
+    makeTransaction(dispatch, newTransactionValue);
+  };
 
   const handleMakeTransaction = () => {
+    let amountFrom = coins[from]['amount'];
+    let amountTo = coins[to]['amount'];
+    let fromValueFloat = parseFloat(exchangeFromValue);
+    let toValueFloat = parseFloat(exchangeToValue);
+
     let transaction = {
       type: actionSelected,
       from,
       to,
-      amountFrom: coins[from]['amount'] - exchangeFromValue,
-      amountTo: coins[to]['amount'] + exchangeToValue,
+      amountFrom,
+      amountTo,
     };
 
-    makeTransaction(dispatch, transaction);
+    switch (actionSelected) {
+      case 'buy':
+      case 'sell':
+      case 'trade': {
+        transaction.amountFrom = coins[from]['amount'] - fromValueFloat;
+        transaction.amountTo = coins[to]['amount'] + toValueFloat;
+        updateTransactionAndCoins(transaction, transaction.amountFrom, transaction.amountTo);
+
+        return;
+      }
+      default:
+        return '';
+    }
   };
 
   const onSelectAction = (type) => {
@@ -201,7 +251,12 @@ const Actions = () => {
         />
       </div>
 
-      <Button onClick={handleMakeTransaction} variant="outlined" className="secondaryButton lastActionButton">
+      <Button
+        disabled={coins.reais.amount === 0 && actionSelected === 'buy'}
+        onClick={handleMakeTransaction}
+        variant="outlined"
+        className="secondaryButton lastActionButton"
+      >
         {termByAction[actionSelected]}
       </Button>
     </div>

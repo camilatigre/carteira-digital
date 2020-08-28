@@ -1,16 +1,10 @@
 const reducer = (state, action) => {
-  console.log(state, 'appReducer');
   switch (action.type) {
-    case 'SAVE_CREDENTIALS':
-      return {
-        ...state,
-        credentials: action.payload.login,
-      };
     case 'MAKE_TRANSACTION': {
       const { type, from, to, amountFrom, amountTo } = action.payload;
-      const transactions = state.transactions;
+      let transactions = state.transactions;
 
-      transactions.push({ type, from, to, amountFrom, amountTo });
+      transactions = transactions.concat({ type, from, to, amountFrom, amountTo });
 
       return {
         ...state,
@@ -34,6 +28,20 @@ const reducer = (state, action) => {
       return {
         ...state,
         coins: Object.assign(state.coins, attCoin),
+      };
+    }
+
+    case 'UPDATE_COINS': {
+      const { typeFrom, amountFrom } = action.payload.objAmountFrom;
+      const { typeTo, amountTo } = action.payload.objAmountTo;
+
+      const coins = state.coins;
+      coins[typeFrom]['amount'] = amountFrom <= 0 ? 0 : amountFrom;
+      coins[typeTo]['amount'] = amountTo <= 0 ? 0 : amountTo;
+
+      return {
+        ...state,
+        coins,
       };
     }
     default:

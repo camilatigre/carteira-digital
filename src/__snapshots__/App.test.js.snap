@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Deveria renderizar o App 1`] = `
+<GlobalProvider>
+  <BrowserRouter>
+    <Switch>
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/register"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/home"
+      />
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/401"
+      />
+    </Switch>
+  </BrowserRouter>
+</GlobalProvider>
+`;

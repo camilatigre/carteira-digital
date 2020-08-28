@@ -3,20 +3,19 @@ import appReducer from './appReducer';
 import PropTypes from 'prop-types';
 
 const initialState = {
-  credentials: { login: '' },
   transactions: [],
   coins: {
     reais: {
       amount: 100000,
     },
     bitcoins: {
-      buy: 0,
-      sell: 0,
+      buy: 64656.45,
+      sell: 64656.45,
       amount: 0,
     },
     brita: {
-      buy: 0,
-      sell: 0,
+      buy: 5.57,
+      sell: 5.57,
       amount: 0,
     },
   },
